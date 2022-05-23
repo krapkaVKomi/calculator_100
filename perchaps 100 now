@@ -1,0 +1,142 @@
+import tkinter as tk
+import math
+
+
+WIDTH = 401
+HEIGHT = 408
+
+DISPLAY_FONT = ("Arial", 30)
+BUTTON_FONT = ("Arial", 25)
+
+window = tk.Tk()
+window.title("(100/100)_2.0")
+window.geometry(f"{WIDTH}x{HEIGHT}")
+window.resizable(0, 0)
+
+# "result fanks"
+
+def calculate():
+    try:
+        result = eval(display.get())
+        input_text.set(result)
+    except:
+        input_text.set(" помилка !")
+
+def sin_funk():
+    try:
+        result = math.sin(float(display.get()))
+        input_text.set(result)
+    except:
+        input_text.set(" помилка !")
+
+def cos_funk():
+    try:
+        result = math.cos(float(display.get()))
+        input_text.set(result)
+    except:
+        input_text.set(" помилка !")
+
+def tg_funk():
+    try:
+        result = math.tan(float(display.get()))
+        input_text.set(result)
+    except:
+        input_text.set(" помилка !")
+
+def ctg_funk():
+    try:
+        result = math.cos(float(display.get())) / math.sin(float(display.get()))
+        input_text.set(result)
+    except:
+        input_text.set(" помилка !")
+   # переведення до різних систем числення
+def eight():
+    try:
+        n = int(display.get()) 
+        b = int(8)
+        r = ''
+        while n > 0:
+            r = str(n % 8) + r
+            n //= b
+        input_text.set(r)
+    except:
+        input_text.set(" помилка !")
+
+def sixteen():
+    try:
+        n = int(display.get()) 
+        s = ''
+        h = '0123456789ABCDEF'
+        while n > 0:
+            s = h[n % 16] + s
+            n = n // 16
+        input_text.set(s)   
+    except:
+        input_text.set(" помилка !")
+
+def two():
+    try:
+        a=int(display.get())             # вводимо число
+        c=[]                             # створюємо порожній список для запису цифр числа у двійковій системі числення
+        while a!=0:                # поки дане число ще можна ділити
+            b=a%2                       # знаходимо остачу
+            c.append(b)              # записуємо остачу в список
+            a=a//2                        # знаходимо частку від ділення
+        c=c[::-1]                      # перепишемо у списку цифри числа у зворотньому порядку
+        input_text.set(c)  
+    except:
+        input_text.set(" помилка !")
+
+
+# Дисплей
+input_text = tk.StringVar()
+
+display = tk.Entry(window, font=DISPLAY_FONT, textvariable=input_text, bg="black", fg="white", width=18)
+display.grid(row=0, columnspan=6, ipady=12)
+
+
+
+# Клавіші
+
+# перший ряд
+tk.Button(window, text="(", font=BUTTON_FONT, fg="black", bg="white", width=3, height=1, command=lambda: display.insert(tk.INSERT, str("("))).grid(row=1, column=0)
+tk.Button(window, text=")", font=BUTTON_FONT, fg="black", bg="white", width=3, height=1, command=lambda: display.insert(tk.INSERT, str(")"))).grid(row=1, column=1)
+tk.Button(window, text="**", font=BUTTON_FONT, fg="black", bg="white",  width=3, height=1, command=lambda: display.insert(tk.INSERT, str("**"))).grid(row=1, column=3)
+tk.Button(window, text="=", font=BUTTON_FONT, fg="black", bg="light blue", width=3, height=1, command=calculate).grid(row=1, column=5)
+tk.Button(window, text="sin", font=BUTTON_FONT, fg="black", bg="light blue",  width=3, height=1, command=sin_funk).grid(row=1, column=4)
+tk.Button(window, text="0", font=BUTTON_FONT, fg="black", bg="white", width=3, height=1, command=lambda: display.insert(tk.INSERT, str(0))).grid(row=1, column=2)
+
+# другий ряд
+tk.Button(window, text="1", font=BUTTON_FONT, fg="black", bg="white", width=3, height=1, command=lambda: display.insert(tk.INSERT, str(1))).grid(row=2, column=0)
+tk.Button(window, text="2", font=BUTTON_FONT, fg="black", bg="white", width=3, height=1, command=lambda: display.insert(tk.INSERT, str(2))).grid(row=2, column=1)
+tk.Button(window, text="3", font=BUTTON_FONT, fg="black", bg="white", width=3, height=1, command=lambda: display.insert(tk.INSERT, str(3))).grid(row=2, column=2)
+tk.Button(window, text="+", font=BUTTON_FONT, fg="black", bg="white", width=3, height=1, command=lambda: display.insert(tk.INSERT, str("+"))).grid(row=2, column=3)
+tk.Button(window, text="cos", font=BUTTON_FONT, fg="black", bg="light blue",  width=3, height=1, command=cos_funk).grid(row=2, column=4)
+tk.Button(window, text="bin", font=BUTTON_FONT, fg="black", bg="light blue",  width=3, height=1, command=two).grid(row=2, column=5)
+
+
+# третій ряд
+tk.Button(window, text="4", font=BUTTON_FONT, fg="black", bg="white", width=3, height=1, command=lambda: display.insert(tk.INSERT, str(4))).grid(row=3, column=0)
+tk.Button(window, text="5", font=BUTTON_FONT, fg="black", bg="white", width=3, height=1, command=lambda: display.insert(tk.INSERT, str(5))).grid(row=3, column=1)
+tk.Button(window, text="6", font=BUTTON_FONT, fg="black", bg="white", width=3, height=1, command=lambda: display.insert(tk.INSERT, str(6))).grid(row=3, column=2)
+tk.Button(window, text="-", font=BUTTON_FONT, fg="black", bg="white", width=3, height=1, command=lambda: display.insert(tk.INSERT, str("-"))).grid(row=3, column=3)
+tk.Button(window, text="tg", font=BUTTON_FONT, fg="black", bg="light blue",  width=3, height=1, command=tg_funk).grid(row=3, column=4)
+tk.Button(window, text="hex", font=BUTTON_FONT, fg="black", bg="light blue",  width=3, height=1, command=sixteen).grid(row=3, column=5)
+
+# четвертий ряд
+tk.Button(window, text="7", font=BUTTON_FONT, fg="black", bg="white", width=3, height=1, command=lambda: display.insert(tk.INSERT, str(7))).grid(row=4, column=0)
+tk.Button(window, text="8", font=BUTTON_FONT, fg="black", bg="white", width=3, height=1, command=lambda: display.insert(tk.INSERT, str(8))).grid(row=4, column=1)
+tk.Button(window, text="9", font=BUTTON_FONT, fg="black", bg="white", width=3, height=1, command=lambda: display.insert(tk.INSERT, str(9))).grid(row=4, column=2)
+tk.Button(window, text="x", font=BUTTON_FONT, fg="black", bg="white", width=3, height=1, command=lambda: display.insert(tk.INSERT, str("*"))).grid(row=4, column=3)
+tk.Button(window, text="ctg", font=BUTTON_FONT, fg="black", bg="light blue",  width=3, height=1, command=ctg_funk).grid(row=4, column=4)
+tk.Button(window, text="oct", font=BUTTON_FONT, fg="black", bg="light blue",  width=3, height=1, command=eight).grid(row=4, column=5)
+
+# п'ятий ряд
+tk.Button(window, text="C", font=BUTTON_FONT, fg="black", bg="pink", width=3, height=1, command=lambda: input_text.set("")).grid(row=5, column=0)
+tk.Button(window, text="<<", font=BUTTON_FONT, fg="black", bg="pink" , width=3, height=1, command=lambda: display.delete(len(display.get())-1)).grid(row=5, column=1)
+tk.Button(window, text=".", font=BUTTON_FONT, fg="black", bg="white", width=3, height=1, command=lambda: display.insert(tk.INSERT, str("."))).grid(row=5, column=2)
+tk.Button(window, text="/", font=BUTTON_FONT, fg="black", bg="white", width=3, height=1, command=lambda: display.insert(tk.INSERT, str("/"))).grid(row=5, column=3)
+tk.Button(window, text="√", font=BUTTON_FONT, fg="black", bg="white",  width=3, height=1, command=lambda: display.insert(tk.INSERT, str("**(1/"))).grid(row=5, column=4)
+tk.Button(window, text=": )", font=BUTTON_FONT, fg="black", bg="white",  width=3, height=1, command=lambda: display.insert(tk.INSERT, str("Сподіваюсь на краще"))).grid(row=5, column=5)
+
+window.mainloop()
